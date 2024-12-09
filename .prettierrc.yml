@@ -1,0 +1,8 @@
+experimentalTernaries: true
+tabWidth: 4
+semi: false
+singleQuote: true
+jsxSingleQuote: true
+trailingComma: none
+arrowParens: avoid
+vueIndentScriptAndStyle: true
