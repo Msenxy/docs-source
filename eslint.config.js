@@ -15,6 +15,11 @@ export default [
     },
 
     ...pluginVue.configs['flat/essential'],
+    {
+        rules: {
+            'vue/multi-word-component-names': ['error', { ignores: ['index'] }]
+        }
+    },
 
     ...vueTsEslintConfig(),
     oxlint.configs['flat/recommended'],
