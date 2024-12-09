@@ -3,6 +3,8 @@ import vueTsEslintConfig from '@vue/eslint-config-typescript'
 import oxlint from 'eslint-plugin-oxlint'
 import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
 
+import unocss from '@unocss/eslint-config/flat'
+
 export default [
     {
         name: 'app/files-to-lint',
@@ -23,5 +25,7 @@ export default [
 
     ...vueTsEslintConfig(),
     oxlint.configs['flat/recommended'],
-    skipFormatting
+    skipFormatting,
+
+    unocss
 ]
