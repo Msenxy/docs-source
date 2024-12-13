@@ -29,7 +29,6 @@
         width: 100vw;
         background: linear-gradient(oklch(87% 0.01 258), oklch(98% 0.02 74));
         display: flex;
-        flex-direction: column;
         gap: 40px;
         align-items: center;
         justify-content: center;

@@ -1,5 +1,5 @@
 <template>
-    <div class="logo-container">
+    <div>
         <img
             src="/src/assets/images/logo.jpg"
             :class="['logo', { 'is-clicked': isLogoClicked }]"
@@ -26,11 +26,6 @@
         font-weight: normal;
         font-style: normal;
         font-display: swap;
-    }
-
-    .logo-container {
-        display: inline-block;
-        position: relative;
     }
 
     .logo {
@@ -63,7 +58,6 @@
         font-family: 'Corn Demo', sans-serif;
         font-weight: 700;
         font-size: 0px;
-        margin: 10px 0;
         color: oklch(32.11% 0 0);
         transition:
             font-size 0.5s cubic-bezier(0.4, 0, 0.2, 1),

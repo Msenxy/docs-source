@@ -8,12 +8,6 @@
         </div>
 
         <div class="menu-items">
-            <Icon
-                icon="material-symbols:dark-mode-outline"
-                class="menu-item"
-                @click="handleMenuClick('theme')"
-            />
-
             <div class="settings-wrapper">
                 <Icon
                     icon="material-symbols:settings-outline"
@@ -31,6 +25,12 @@
                     </div>
                 </div>
             </div>
+
+            <Icon
+                icon="material-symbols:dark-mode-outline"
+                class="menu-item"
+                @click="handleMenuClick('theme')"
+            />
         </div>
 
         <div class="menu-items">
@@ -134,8 +134,6 @@
         padding: 8px;
         border-radius: 20px;
         box-shadow: 0 4px 15px oklch(0% 0 0 / 10%);
-        flex-direction: row-reverse;
-        gap: 8px;
         transform: translateX(20px);
         opacity: 0;
         transition:
