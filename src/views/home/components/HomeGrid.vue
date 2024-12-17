@@ -17,7 +17,7 @@
     defineProps<{ isLogoClicked: boolean }>()
 
     const gridList = [
-        { icon: 'mdi:more-horiz', click: () => router.push('/docs') }
+        { icon: 'mdi:more-horiz', click: () => router.push('/test') }
     ]
 </script>
 
