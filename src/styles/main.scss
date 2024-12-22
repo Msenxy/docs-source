@@ -1,0 +1,30 @@
+@use 'sass:map';
+
+:root {
+    --fucking-color: red;
+}
+
+$fonts: (
+    (
+        font-family: 'LXGW Bright',
+        src: url('/fonts/LXGW_Bright/LXGW_Bright.woff2') format('woff2')
+    ),
+    (
+        font-family: 'Chill Round',
+        src: url('/fonts/Chill_Round/Chill_Round.woff2') format('woff2')
+    )
+);
+
+@each $font in $fonts {
+    @font-face {
+        font-family: map.get($font, font-family);
+        src: map.get($font, src);
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+}
+
+body {
+    margin: 0;
+}
