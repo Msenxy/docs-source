@@ -14,11 +14,16 @@
     import router from '@/router'
     import { Icon } from '@iconify/vue'
 
+    import { routes } from 'vue-router/auto-routes'
+
     defineProps<{ isLogoClicked: boolean }>()
 
     const gridList = [
-        { icon: 'mdi:more-horiz', click: () => router.push('/test') }
+        { icon: 'mdi:more-horiz', click: () => router.push('/test') },
+        { icon: 'mdi:more-horiz', click: () => router.push('/directory') }
     ]
+
+    console.log(routes)
 </script>
 
 <style lang="scss" scoped>
