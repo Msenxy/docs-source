@@ -17,7 +17,8 @@ export default defineConfig({
     plugins: [
         VueRouter({
             extensions: ['.vue', '.md'],
-            routesFolder: 'src/pages'
+            routesFolder: 'src/pages',
+            exclude: ['src/pages/*.md']
         }),
 
         vue({ include: [/\.vue$/, /\.md$/] }),
@@ -42,11 +43,6 @@ export default defineConfig({
                 md.use(heading)
                 md.use(filename)
                 md.use(space)
-            },
-            transforms: {
-                before(code) {
-                    return code
-                }
             }
         }),
 
