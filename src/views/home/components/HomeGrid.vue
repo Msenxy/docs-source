@@ -16,14 +16,22 @@
 
     import { routes } from 'vue-router/auto-routes'
 
+    const gridList = routes.map(route => {
+        const path = route.path as string
+
+        const iconMap: { [key: string]: string } = {
+            Vue: 'mdi:vuejs',
+            React: 'mdi:react',
+            Unity: 'mdi:unity'
+        }
+
+        return {
+            icon: iconMap[path.slice(1)] || 'mdi:file-document',
+            click: () => router.push(path)
+        }
+    })
+
     defineProps<{ isLogoClicked: boolean }>()
-
-    const gridList = [
-        { icon: 'mdi:more-horiz', click: () => router.push('/test') },
-        { icon: 'mdi:more-horiz', click: () => router.push('/directory') }
-    ]
-
-    console.log(routes)
 </script>
 
 <style lang="scss" scoped>
