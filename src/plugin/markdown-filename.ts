@@ -1,4 +1,3 @@
-// import type MarkdownIt from 'markdown-it'
 import { resolve } from 'path'
 import type { Plugin } from 'vite'
 

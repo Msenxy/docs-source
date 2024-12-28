@@ -11,10 +11,13 @@
 </template>
 
 <script setup lang="ts">
-    import router from '@/router'
+    import { useRouter } from 'vue-router'
+    import { routes } from 'vue-router/auto-routes'
     import { Icon } from '@iconify/vue'
 
-    import { routes } from 'vue-router/auto-routes'
+    defineProps<{ isLogoClicked: boolean }>()
+
+    const router = useRouter()
 
     const gridList = routes.map(route => {
         const path = route.path as string
@@ -30,8 +33,6 @@
             click: () => router.push(path)
         }
     })
-
-    defineProps<{ isLogoClicked: boolean }>()
 </script>
 
 <style lang="scss" scoped>
