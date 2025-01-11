@@ -1,28 +1,46 @@
 <template>
-    <div>
-        <h1>{{ title }}</h1>
-        <p>{{ content }}</p>
+    <div class="directory">
+        <div class="directory-header">{{ path }}</div>
+
+        <RouterLink
+            class="directory-container"
+            v-for="(item, index) in items"
+            :key="index"
+            :to="item.name"
+        >
+            {{ item.path }}
+        </RouterLink>
     </div>
 </template>
 
 <script setup lang="ts">
     import { useRoute } from 'vue-router'
+    import { routes } from 'vue-router/auto-routes'
 
     const route = useRoute()
     const path = route.name as string
 
-    const titleMap: { [key: string]: string } = {
-        React: 'React 页面',
-        Vue: 'Vue 页面',
-        Unity: 'Unity 页面'
-    }
-
-    const contentMap: { [key: string]: string } = {
-        React: '这是 React 页面内容。',
-        Vue: '这是 Vue 页面内容。',
-        Unity: '这是 Unity 页面内容。'
-    }
-
-    const title = titleMap[path] || '默认页面'
-    const content = contentMap[path] || '这是默认页面内容。'
+    const items = routes
+        .filter(item => item.path.slice(1) === path)
+        .flatMap(item => item.children)
 </script>
+
+<style lang="scss" scoped>
+    .directory {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'Chill Round', 'LXGW Bright';
+
+        .directory-header {
+            font-size: 3rem;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .directory-container {
+            font-size: 1.25rem;
+            line-height: 1.6;
+        }
+    }
+</style>
