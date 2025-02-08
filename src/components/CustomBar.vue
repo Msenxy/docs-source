@@ -1,6 +1,13 @@
 <template>
     <div class="navbar">
-        <Icon icon="weui:back-filled" class="navbar-back" />
+        <RouterLink to="/">
+            <Icon
+                icon="line-md:home"
+                class="navbar-back"
+                v-if="useRoute().name !== 'home'"
+                @click="a"
+            />
+        </RouterLink>
 
         <div @click="toggleMenu" class="navbar-menu">
             <Icon
@@ -26,9 +33,12 @@
 
 <script lang="ts" setup>
     import { ref, reactive } from 'vue'
+    import { RouterLink, useRoute, useRouter } from 'vue-router'
     import { Icon } from '@iconify/vue'
+
     import CustomSwitch from '@/components/CustomSwitch.vue'
     import CustomCard from '@/components/CustomCard.vue'
+
     import { useLocalStorage } from '@/hooks/useLocalStorage'
 
     const isMenuExpanded = ref(false)
@@ -68,19 +78,23 @@
                 )
         }
     ]
+
+    const a = () => {}
 </script>
 
 <style lang="scss" scoped>
     .navbar {
         position: fixed;
         width: 100vw;
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(2, auto);
         justify-content: space-between;
     }
 
     .navbar-back {
         margin: 28px 0 0 20px;
         font-size: 1.5rem;
+        color: oklch(32.11% 0 0);
         cursor: pointer;
         transition: transform 0.3s ease;
 
@@ -97,6 +111,7 @@
         background: oklch(100% 0 0 / 20%);
         border-radius: 50%;
         display: flex;
+        grid-column: 2;
         justify-content: center;
         align-items: center;
         cursor: pointer;
