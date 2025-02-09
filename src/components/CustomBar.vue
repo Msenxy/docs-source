@@ -1,12 +1,7 @@
 <template>
-    <div class="navbar">
-        <RouterLink to="/">
-            <Icon
-                icon="line-md:home"
-                class="navbar-back"
-                v-if="useRoute().name !== 'home'"
-                @click="a"
-            />
+    <div class="navbar" ref="menuRef">
+        <RouterLink to="/" v-if="showHomeButton">
+            <Icon icon="line-md:home" class="navbar-back" />
         </RouterLink>
 
         <div @click="toggleMenu" class="navbar-menu">
@@ -17,12 +12,12 @@
         </div>
     </div>
 
-    <div :class="['card', { 'card-show': isMenuExpanded }]">
+    <div :class="['card', { 'card-show': isMenuExpanded }]" ref="cardRef">
         <CustomCard :icon="settingsCard" />
         <CustomCard :icon="linkCard" />
     </div>
 
-    <div class="popup" v-if="isSettingsOpen">
+    <div class="popup" v-if="isSettingsOpen" ref="popupRef">
         <span>详细布局</span>
         <CustomSwitch
             :change="settings.simpleLayout"
@@ -32,8 +27,8 @@
 </template>
 
 <script lang="ts" setup>
-    import { ref, reactive } from 'vue'
-    import { RouterLink, useRoute, useRouter } from 'vue-router'
+    import { ref, reactive, useTemplateRef, computed } from 'vue'
+    import { RouterLink, useRoute } from 'vue-router'
     import { Icon } from '@iconify/vue'
 
     import CustomSwitch from '@/components/CustomSwitch.vue'
@@ -41,13 +36,6 @@
 
     import { useLocalStorage } from '@/hooks/useLocalStorage'
 
-    const isMenuExpanded = ref(false)
-    const toggleMenu = () => {
-        isMenuExpanded.value = !isMenuExpanded.value
-        isSettingsOpen.value = false
-    }
-
-    const isSettingsOpen = ref(false)
     const settingsCard = [
         {
             iconName: 'material-symbols:settings-outline',
@@ -58,15 +46,6 @@
             clickEvent: () => {}
         }
     ]
-
-    const settings = reactive({
-        simpleLayout: useLocalStorage('simpleLayout', false)
-    })
-    const simpleLayoutChange = () => {
-        settings.simpleLayout = !settings.simpleLayout
-        localStorage.setItem('simpleLayout', String(settings.simpleLayout))
-    }
-
     const linkCard = [
         {
             iconName: 'mdi:github',
@@ -79,7 +58,46 @@
         }
     ]
 
-    const a = () => {}
+    const showHomeButton = computed(() => useRoute().name !== 'home')
+
+    const isMenuExpanded = ref(false)
+    const isSettingsOpen = ref(false)
+    const menuRef = useTemplateRef('menuRef')
+    const cardRef = useTemplateRef('cardRef')
+    const popupRef = useTemplateRef('popupRef')
+    const toggleMenu = () => {
+        isMenuExpanded.value = !isMenuExpanded.value
+        isSettingsOpen.value = false
+
+        if (isMenuExpanded.value) {
+            document.addEventListener('click', handleClickOutside)
+        }
+    }
+
+    const settings = reactive({
+        simpleLayout: useLocalStorage('simpleLayout', false)
+    })
+    const simpleLayoutChange = () => {
+        settings.simpleLayout = !settings.simpleLayout
+        localStorage.setItem('simpleLayout', String(settings.simpleLayout))
+    }
+
+    const handleClickOutside = (event: MouseEvent) => {
+        const target = event.target as HTMLElement
+
+        const elements = [menuRef.value, cardRef.value, popupRef.value]
+
+        const isClickOutsideAll = elements
+            .filter(Boolean)
+            .every(element => !element!.contains(target))
+
+        if (isClickOutsideAll) {
+            isMenuExpanded.value = false
+            isSettingsOpen.value = false
+
+            document.removeEventListener('click', handleClickOutside)
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -92,7 +110,7 @@
     }
 
     .navbar-back {
-        margin: 28px 0 0 20px;
+        margin: 36px 0 0 24px;
         font-size: 1.5rem;
         color: oklch(32.11% 0 0);
         cursor: pointer;
