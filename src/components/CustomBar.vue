@@ -58,7 +58,8 @@
         }
     ]
 
-    const showHomeButton = computed(() => useRoute().name !== 'home')
+    const route = useRoute()
+    const showHomeButton = computed(() => route.name !== 'home')
 
     const isMenuExpanded = ref(false)
     const isSettingsOpen = ref(false)
