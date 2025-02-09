@@ -1,15 +1,15 @@
 <template>
     <div class="directory">
         <div class="directory-content">
-            <div class="header">{{ path }}</div>
+            <div class="header">{{ name }}</div>
 
             <RouterLink
-                class="container"
                 v-for="(item, index) in items"
                 :key="index"
                 :to="item.name"
+                class="container"
             >
-                {{ item.path }} <br />
+                {{ item.path }}<br />
             </RouterLink>
         </div>
     </div>
@@ -20,10 +20,10 @@
     import { routes } from 'vue-router/auto-routes'
 
     const route = useRoute()
-    const path = route.name as string
+    const name = route.name as string
 
     const items = routes
-        .filter(item => item.path.slice(1) === path)
+        .filter(item => item.path.slice(1) === name)
         .flatMap(item => item.children)
 </script>
 
@@ -38,8 +38,7 @@
 
     .directory-content {
         grid-column: 2;
-        padding: 0 1rem;
-        box-shadow: 0 2px 10px oklch(87% 0.01 258);
+        padding: 0 2rem;
     }
 
     .header {
