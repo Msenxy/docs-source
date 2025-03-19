@@ -16,11 +16,14 @@
 </template>
 
 <script setup lang="ts">
-    import { useRoute } from 'vue-router'
+    import { useRoute, useRouter } from 'vue-router'
     import { routes } from 'vue-router/auto-routes'
 
     const route = useRoute()
+    const router = useRouter()
     const name = route.name as string
+    const routess = router.getRoutes()
+    // console.log(routess)
 
     const items = routes
         .filter(item => item.path.slice(1) === name)
