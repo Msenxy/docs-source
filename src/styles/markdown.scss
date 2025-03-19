@@ -8,12 +8,6 @@
     font-display: swap;
 }
 
-#app:has(.markdown-body) {
-    display: grid;
-    grid-template-columns: 1fr 40vw 1fr;
-    justify-content: center;
-}
-
 .markdown-body {
     grid-column: 2;
     font-family: 'Chill Round', 'LXGW Bright';

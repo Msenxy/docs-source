@@ -14,6 +14,16 @@ import { filename } from './src/plugin/markdown-filename'
 import { space } from './src/plugin/markdown-space'
 
 export default defineConfig({
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./src', import.meta.url))
+        }
+    },
+
+    optimizeDeps: {
+        include: ['vue', 'vue-router']
+    },
+
     plugins: [
         VueRouter({
             extensions: ['.vue', '.md'],
@@ -24,6 +34,8 @@ export default defineConfig({
         vue({ include: [/\.vue$/, /\.md$/] }),
 
         Markdown({
+            wrapperComponent: 'MarkdownWrapper',
+
             async markdownItSetup(md) {
                 md.use(
                     await Shikiji({
@@ -47,10 +59,5 @@ export default defineConfig({
         }),
 
         vueDevTools()
-    ],
-    resolve: {
-        alias: {
-            '@': fileURLToPath(new URL('./src', import.meta.url))
-        }
-    }
+    ]
 })

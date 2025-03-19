@@ -18,7 +18,7 @@
                 <div class="settings-popup" v-if="isSettingsOpen">
                     <div class="setting-item">
                         <span>详细布局</span>
-                        <ms-switch
+                        <CustomSwitch
                             :change="settings.simpleLayout"
                             @click="simpleLayoutChange"
                         />
@@ -46,7 +46,7 @@
 <script lang="ts" setup>
     import { ref, reactive } from 'vue'
     import { Icon } from '@iconify/vue'
-    import MsSwitch from '@/components/MsSwitch.vue'
+    import CustomSwitch from '@/components/CustomSwitch.vue'
     import { useLocalStorage } from '@/hooks/useLocalStorage'
 
     const isMenuExpanded = ref(false)

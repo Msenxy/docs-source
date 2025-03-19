@@ -1,6 +1,5 @@
 <template>
     <div class="home">
-        <HomeMenu />
         <HomeLogo v-model="isLogoClicked" />
         <HomeGrid :isLogoClicked />
     </div>
@@ -9,7 +8,6 @@
 <script lang="ts" setup>
     import { ref, watch, unref } from 'vue'
 
-    import HomeMenu from '@/views/home/components/HomeMenu.vue'
     import HomeLogo from '@/views/home/components/HomeLogo.vue'
     import HomeGrid from '@/views/home/components/HomeGrid.vue'
     import { useLocalStorage } from '@/hooks/useLocalStorage'
